@@ -234,7 +234,7 @@ async def callback(call: CallbackQuery, state: FSMContext):
         else:
             txhash = 'Failed to download <b>txhash</b> try logging in again'
         
-        await message.answer(f'txhash: <code>{txhash}</code>')
+        await message.answer(f'Success, your txhash: <code>{txhash}</code>')
         await bot.answer_callback_query(call.id)
 
     elif call.data == 'close_session':
