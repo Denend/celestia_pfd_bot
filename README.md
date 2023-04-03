@@ -7,7 +7,13 @@
 3) Enter password from the server
 
 You ll see your node id, uptime score and number of pfd transactions
-You can now easily submit a pay for data transaction with a button Submit pay for blob tx
+
+Now make sure you have enough test tokens on your wallet 
+You can check this out with command 
+
+curl -X GET http://localhost:26659/balance
+
+If you wallet has enough tokens - you can easily submit the transaction with a button "Submit pay for blob tx"
 If its successfull you will get a msg with your tx hash
 
 After you are done with submitting pfd txs - dont forget to **close the session**
