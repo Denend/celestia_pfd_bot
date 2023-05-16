@@ -111,14 +111,18 @@ async def get_pass(message: Message, state: FSMContext):
                                          "method": "GET",
                                          "mode": "cors",
                                          "credentials": "omit"}).text
-            resp: dict = json.loads(resp_text)
-            if 'uptime' in resp.keys():
-                uptime_score = resp['uptime']
-            else:
+            try:
+                resp: dict = json.loads(resp_text)
+                if 'uptime' in resp.keys():
+                    uptime_score = resp['uptime']
+                else:
+                    uptime_score = 'Error'
+                if 'pfb_count' in resp.keys():
+                    pfb_count = resp['pfb_count']
+                else:
+                    pfb_count = 'Error'
+            except Exception as e:
                 uptime_score = 'Error'
-            if 'pfb_count' in resp.keys():
-                pfb_count = resp['pfb_count']
-            else:
                 pfb_count = 'Error'
             await message.answer(f'''Connected to server.
 
@@ -171,14 +175,18 @@ async def callback(call: CallbackQuery, state: FSMContext):
                                          "method": "GET",
                                          "mode": "cors",
                                          "credentials": "omit"}).text
-        resp: dict = json.loads(resp_text)
-        if 'uptime' in resp.keys():
-            uptime_score = resp['uptime']
-        else:
+        try:
+            resp: dict = json.loads(resp_text)
+            if 'uptime' in resp.keys():
+                uptime_score = resp['uptime']
+            else:
+                uptime_score = 'Error'
+            if 'pfb_count' in resp.keys():
+                pfb_count = resp['pfb_count']
+            else:
+                pfb_count = 'Error'
+        except Exception as e:
             uptime_score = 'Error'
-        if 'pfb_count' in resp.keys():
-            pfb_count = resp['pfb_count']
-        else:
             pfb_count = 'Error'
         await message.answer(f'''<b>Your node id is:</b>
 <code>{node_id}</code>
@@ -229,11 +237,14 @@ async def callback(call: CallbackQuery, state: FSMContext):
             return
 
         txhash = ''
-        if 'txhash' in resp.keys():
-            txhash = resp['txhash']
-        else:
+        try:
+            if 'txhash' in resp.keys():
+                txhash = resp['txhash']
+            else:
+                txhash = 'Failed to download <b>txhash</b> try logging in again'
+        except Exception as e:
             txhash = 'Failed to download <b>txhash</b> try logging in again'
-        
+
         await message.answer(f'Success, your txhash: <code>{txhash}</code>')
         await bot.answer_callback_query(call.id)
 
