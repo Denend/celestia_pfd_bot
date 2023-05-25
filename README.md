@@ -1,5 +1,7 @@
 **Celestia bot for submitting pay for data transactions**
 
+_⚠️ You gotta have a working light node on your server to proceed_
+
 **Insctructions**
 
 1) Type /start to start the bot
